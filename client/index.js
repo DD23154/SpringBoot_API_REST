@@ -8,6 +8,10 @@ const team1 = {
   "name": "team 1"
 }
 
+const team2 = {
+  "name": "team 2"
+}
+
 const player1 = { 
   "name": "player 1", 
   "team": { "id": 1 } 
@@ -18,10 +22,15 @@ const player2 = {
   "team": { "id": 1 } 
 }
 
+const player3 = { 
+  "name": "player 3", 
+  "team": { "id": 2 } 
+}
+
 const postTeam = async (body) => {
   try {
     const response = await axios.post(urlTeam, body);
-    console.log(response.status);
+    console.log(response.status, " Team created");
   } catch (error) {
     console.log(error);
   }
@@ -54,7 +63,7 @@ const getTeams = async () => {
 const postPlayer = async (body) => {
   try {
     const response = await axios.post(urlPlayer, body);
-    console.log(response.status);
+    console.log(response.status, " Player created");
   } catch (error) {
     console.log(error);
   }
@@ -75,6 +84,10 @@ postTeam(team1)
   .then(() => postPlayer(player1))
   .then(() => getPlayers())
   .then(() => postPlayer(player2))
+  .then(() => postTeam(team2))
+  .then(() => getPlayers())
+  .then(() => getTeams())
+  .then(() => postPlayer(player3))
   .then(() => getPlayers())
   .then(() => getTeams())
   .catch(error => console.log(error));
